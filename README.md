@@ -1,6 +1,8 @@
 # Skyline-AGI-5.1Mv2
 Skyline AGI 5.1Mv2
-
+Creation Date: November 4th 2024.
+Solid working date: Nov 5th 2024.
+Skyline AGI by rainmanp7.
 
 ### Architectural Overview for Skyline AGI 5.1Mv2
 
