@@ -1,5 +1,32 @@
 # Skyline-AGI-5.1Mv2
 Skyline AGI 5.1Mv2
+
+
+### Architectural Overview for Skyline AGI 5.1Mv2
+
+#### 1. **Main Components**:
+   - **main.py**: Serves as the central controller, initializing the processes, handling task distribution, and running the main AGI pipeline.
+   - **knowledge_base.py**: Manages a tiered knowledge base, allowing dynamic storage and retrieval across different complexity levels. This includes handling data, model configurations, and previously learned knowledge in a tiered structure.
+   - **models.py**: Now relies on `EnhancedModelSelector` instead of separate simple, medium, and complex models. It includes model validation and monitoring, while dynamically selecting models based on complexity factors.
+   - **config.json**: Holds dynamic configurations, including complexity-based activation functions, hyperparameters, and other adaptive settings that enable the system to respond to varied task demands.
+   
+#### 2. **Supporting Modules**:
+   - **async_process_manager.py**: Implements asynchronous process management, handling task prioritization, system resources, and error recovery.
+   - **parallel_utils.py**: Manages parallelized learning tasks, facilitating efficient multi-process handling and parallel optimization.
+   - **complexity.py**: Provides complexity metrics and model configurations based on nine complexity tiers, guiding the model selection and optimization.
+   - **optimization.py**: Includes Bayesian optimization functions and dynamic search space adjustments for efficient model hyperparameter tuning.
+   - **cache_utils.py**: Handles data caching, ensuring efficiency by reducing redundant computations.
+
+#### 3. **Data Flow**:
+   - **Initialization**: `main.py` initializes components, loading configurations from `config.json`.
+   - **Task Management**: The `AsyncProcessManager` distributes tasks among models based on complexity.
+   - **Model Selection and Training**: `EnhancedModelSelector` selects and trains models dynamically based on input data complexity.
+   - **Knowledge Updates**: `knowledge_base.py` updates the tiered knowledge base with newly learned parameters or models.
+   - **Parallel Execution**: `parallel_utils.py` enables concurrent task execution, optimizing resource usage and processing speed.
+   - **Performance Tracking**: `ModelValidator` monitors model performance, storing metrics to inform further training adjustments.
+
+This architecture ensures the system adapts to task complexity dynamically and efficiently. Each module’s role is specialized, with `EnhancedModelSelector` replacing traditional model hierarchies, allowing the nine-tiered structure to handle diverse model requirements based on real-time complexity assessments.
+
 base code flow
 
 config.json
