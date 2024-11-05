@@ -32,7 +32,7 @@ This architecture ensures the system adapts to task complexity dynamically and e
 base code flow
 
 config.json
-````
+```json
 # Beginning of config.json
 {
   "inputs": [
@@ -82,8 +82,7 @@ config.json
 }
 # End of config.json
 ````
-# 9 Base tier ready implemented Nov9
-# This uses not a random but specific 
+
 # Beginning of main.py
 
 ```python
@@ -145,7 +144,7 @@ async def main():
     if best_params is not None:
         final_model = YourModelClass().set_params(**best_params)
         final_model.fit(X_train, y_train)
-        final_performance = evaluate_performance(final_model, X_test, y_test)
+       final_performance = evaluate_performance(final_model, X_test, y_test)
         logging.info(f"Final model MSE on test set: {final_performance}")
 
         # Store the final model, complexity factor, and performance in the knowledge base
@@ -192,7 +191,7 @@ else:
 
 # 9 Base tier implemented Nov9
 # Beginning of complexity.py
-````
+```python
 from sklearn.linear_model import LinearRegression, Ridge, Lasso
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
 from sklearn.neural_network import MLPRegressor
@@ -378,7 +377,7 @@ class EnhancedModelSelector(ModelSelector):
 ````
 # 9 base tier implemented. Nov9
 # Beginning of knowledge_base.py
-````
+```python
 from collections import deque
 from threading import Lock
 from typing import List, Dict, Any, Tuple, Optional
@@ -505,7 +504,7 @@ class TieredKnowledgeBase:
 ````
 
 # models.py 
-````
+```python
 # 9 tier reworked
 # removed the simple medium complex
 # models.py
@@ -590,7 +589,7 @@ End of models.py
 
 
 # Beginning of async_process_manager.py
-````
+```python
 import asyncio
 from dataclasses import dataclass
 from typing import Dict, List, Any, Callable
@@ -678,7 +677,7 @@ class AsyncProcessManager:
 ````
 
 # Beginning of parallel_utils.py
-````
+```python
 from multiprocessing import Pool
 import asyncio
 from concurrent.futures import ProcessPoolExecutor
@@ -782,7 +781,7 @@ if __name__ == "__main__":
 ````
 
 # Beginning of optimization.py
-````
+```python
 from skopt import BayesSearchCV
 from skopt.space import Real, Integer
 from sklearn.gaussian_process import GaussianProcessRegressor
@@ -813,7 +812,7 @@ def adjust_search_space(current_space, performance, threshold=0.1):
 # End of optimization.py
 ````
 # Beginning of cache_utils.py
-````
+```python
 import hashlib
 import functools
 
@@ -845,7 +844,7 @@ def invalidate_cache_if_changed(current_X_train, current_y_train, current_hyperp
 ````
 
 # Beginning of logging_config.py
-````
+```python
 import logging
 logging.basicConfig(level=logging.INFO)
 # End of logging_config.py
