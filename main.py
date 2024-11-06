@@ -1,6 +1,7 @@
 # 9 Base tier ready implemented Nov9
 # This uses not a random but specific 
 # Beginning of main.py
+# Nov6 Cog in place 9:07am
 
 ```python
 # Beginning of main.py
@@ -103,6 +104,42 @@ if best_params is not None:
     logging.info(f"Final model MSE on test set: {final_performance}")
 else:
     logging.error("Optimization failed to produce valid results.")
+
+# Start Nov6 call internals.
+from internal_process_monitor import InternalProcessMonitor
+
+     async def main():
+         process_manager = AsyncProcessManager()
+         internal_monitor = InternalProcessMonitor()
+
+         # Monitor CPU and memory usage
+         while True:
+             internal_monitor.monitor_cpu_usage()
+             internal_monitor.monitor_memory_usage()
+             await asyncio.sleep(1)
+
+         # Monitor task queue length
+         while not process_manager.task_queue.empty():
+             internal_monitor.monitor_task_queue_length(process_manager.task_queue.qsize())
+             await asyncio.sleep(0.1)
+
+         # Monitor knowledge base updates
+         kb = TieredKnowledgeBase()
+         last_update_count = 0
+         while True:
+             current_update_count = len(kb.get_recent_updates())
+             internal_monitor.monitor_knowledge_base_updates(current_update_count - last_update_count)
+             last_update_count = current_update_count
+             await asyncio.sleep(1)
+
+         # Monitor model training and inference times
+         model_validator = ExpandedModelValidator()
+         while True:
+             await model_validator.validate_model(model, X_val, y_val, "model_key")
+             internal_monitor.monitor_model_training_time(model_validator.metrics_history["model_key"][-1].training_time)
+             internal_monitor.monitor_model_inference_time(model_validator.metrics_history["model_key"][-1].prediction_latency)
+             await asyncio.sleep(5)
+# End of Nov6 call
 # End of main.py
 ```
 
