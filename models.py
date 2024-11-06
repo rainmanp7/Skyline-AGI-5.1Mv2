@@ -1,6 +1,6 @@
 # 9 tier reworked
 # removed the simple medium complex
-# models.py with start of meta cognitive.
+# models.py with start of meta cognitive. Nov6 8:40am
 ````python
 
 from dataclasses import dataclass
