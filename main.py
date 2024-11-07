@@ -12,12 +12,21 @@ from complexity import EnhancedModelSelector
 from optimization import adjust_search_space, parallel_bayesian_optimization
 from knowledge_base import TieredKnowledgeBase
 from internal_process_monitor import InternalProcessMonitor
+from metacognitive_manager import MetaCognitiveManager
+
+async def main():
+    process_manager = AsyncProcessManager()
+    kb = TieredKnowledgeBase()
+    model_selector = EnhancedModelSelector()
+    meta_cognitive_manager = MetaCognitiveManager()  # Add this line
 
 async def main():
     process_manager = AsyncProcessManager()
     kb = TieredKnowledgeBase()
     model_selector = EnhancedModelSelector()
     internal_monitor = InternalProcessMonitor()
+meta_cognitive_manager = MetaCognitiveManager()
+# metacog
 
     try:
         # Start monitoring for model training
@@ -63,6 +72,23 @@ async def main():
             final_model = YourModelClass().set_params(**best_params)
             final_model.fit(X_train, y_train)
             final_performance = evaluate_performance(final_model, X_test, y_test)
+# cog start
+meta_cognitive_manager.update_self_model(
+            'model_training',
+            {
+                'mse': final_performance,
+                'complexity_factor': complexity_factor,
+                'optimization_score': best_score
+            }
+        )
+        
+        component_state = meta_cognitive_manager.get_component_state('model_training')
+        if component_state and component_state['confidence'] < 0.7:
+            logging.warning("Low confidence in model performance, "
+                          "considering retraining with different parameters")
+
+# cog area end
+
             logging.info(f"Final model MSE on test set: {final_performance}")
 
             # Store in knowledge base
@@ -122,7 +148,6 @@ def get_complexity_factor(X, y):
 # Run the async process
 if __name__ == "__main__":
     results = asyncio.run(main())
-
 
 ```
 
