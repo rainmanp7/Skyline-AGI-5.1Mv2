@@ -46,4 +46,18 @@
     }
   ]
 }
+{
+    "metacognitive_settings": {
+        "enabled": true,
+        "anomaly_threshold": 0.95,
+        "confidence_threshold": 0.7,
+        "performance_history_size": 100,
+        "monitored_components": [
+            "model_training",
+            "optimization",
+            "knowledge_base"
+        ]
+    }
+}
+
 # End of config.json
