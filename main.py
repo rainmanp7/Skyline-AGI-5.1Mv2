@@ -18,15 +18,15 @@ async def main():
     process_manager = AsyncProcessManager()
     kb = TieredKnowledgeBase()
     model_selector = EnhancedModelSelector()
-    meta_cognitive_manager = MetaCognitiveManager()  # Add this line
-
-async def main():
-    process_manager = AsyncProcessManager()
-    kb = TieredKnowledgeBase()
-    model_selector = EnhancedModelSelector()
     internal_monitor = InternalProcessMonitor()
 meta_cognitive_manager = MetaCognitiveManager()
-# metacog
+
+metacognitive_manager = MetaCognitiveManager(process_manager, kb, model_validator)
+
+# Run the metacognitive tasks in a separate thread
+asyncio.create_task(metacognitive_manager.run_metacognitive_tasks())
+
+# metacog end
 
     try:
         # Start monitoring for model training
@@ -148,6 +148,7 @@ def get_complexity_factor(X, y):
 # Run the async process
 if __name__ == "__main__":
     results = asyncio.run(main())
+
 
 ```
 
