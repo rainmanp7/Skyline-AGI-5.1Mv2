@@ -14,7 +14,55 @@ class SystemState:
     performance_metrics: Dict[str, float]
     active_components: List[str]
 
+# class start added here
 class MetaCognitiveManager:
+def monitor_performance(self, model_key: str, performance: Tuple[float, float, float]) -> None:
+    """
+    Monitor the performance of a model and store it in the performance history.
+    Args:
+        model_key: The identifier of the model.
+        performance: A tuple of (mae, mse, r2) metrics.
+    """
+    self.performance_history.append((model_key, performance))
+    logging.info(f"Model {model_key} performance: MAE={performance[0]}, MSE={performance[1]}, R2={performance[2]}")
+
+def update_system_parameters(self) -> None:
+    """
+    Analyze the performance history and update system parameters accordingly.
+    """
+    if len(self.performance_history) < 10:
+        return  # Need more data to make informed decisions
+
+    # Calculate the average performance across all models
+    total_mae, total_mse, total_r2 = 0, 0, 0
+    for _, (mae, mse, r2) in self.performance_history:
+        total_mae += mae
+        total_mse += mse
+        total_r2 += r2
+    avg_mae = total_mae / len(self.performance_history)
+    avg_mse = total_mse / len(self.performance_history)
+    avg_r2 = total_r2 / len(self.performance_history)
+
+    # Adjust system parameters based on the average performance
+    if avg_mse > self.adaptation_range[1]:
+        self.process_manager.max_workers = int(self.process_manager.max_workers * self.adaptation_rate)
+        self.knowledge_base.max_recent_items = int(self.knowledge_base.max_recent_items * self.adaptation_rate)
+        logging.info("Decreasing system parameters due to poor performance.")
+    elif avg_mse < self.adaptation_range[0]:
+        self.process_manager.max_workers = int(self.process_manager.max_workers / self.adaptation_rate)
+        self.knowledge_base.max_recent_items = int(self.knowledge_base.max_recent_items / self.adaptation_rate)
+        logging.info("Increasing system parameters due to good performance.")
+
+def run_metacognitive_tasks(self) -> None:
+    """
+    Periodically run metacognitive tasks, such as monitoring performance and updating system parameters.
+    """
+    while True:
+        self.monitor_performance()
+        self.update_system_parameters()
+        time.sleep(60)  # Run metacognitive tasks every minute
+# end of addition
+
     def __init__(self):
         self.system_state = SystemState(
             capabilities={},
