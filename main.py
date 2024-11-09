@@ -2,7 +2,7 @@
 # This uses not a random but specific 
 # Beginning of main.py
 # Nov6 Cog in place 9:07am
-# Beginning of main.py nov7
+# Nov9 Memory Module 
 
 ````python
 import asyncio
@@ -148,7 +148,20 @@ def get_complexity_factor(X, y):
 # Run the async process
 if __name__ == "__main__":
     results = asyncio.run(main())
+# Train final model with best parameters
+    if best_params is not None:
+        final_model = YourModelClass().set_params(**best_params)
+        model_selector.assimilation_module.assimilate(final_model, X_train, y_train, complexity_factor)
+        final_performance = evaluate_performance(final_model, X_test, y_test)
+        logging.info(f"Final model MSE on test set: {final_performance}")
 
+        # Store the final model, complexity factor, and performance in the knowledge base
+        kb.update("final_model", final_model, complexity_factor)
+        kb.update("final_performance", final_performance, complexity_factor)
+    else:
+        logging.error("Optimization failed to produce valid results.")
+
+    return results
 
 ```
 
