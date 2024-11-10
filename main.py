@@ -2,7 +2,8 @@
 # This uses not a random but specific 
 # Beginning of main.py
 # Nov6 Cog in place 9:07am
-# Nov9 Memory Module 
+# Beginning of main.py nov7
+# RRL Memory module done
 
 ````python
 import asyncio
@@ -14,17 +15,18 @@ from knowledge_base import TieredKnowledgeBase
 from internal_process_monitor import InternalProcessMonitor
 from metacognitive_manager import MetaCognitiveManager
 
+#Beginning of changes to integrate AssimilationMemoryModule
 async def main():
     process_manager = AsyncProcessManager()
     kb = TieredKnowledgeBase()
-    model_selector = EnhancedModelSelector()
+    model_selector = EnhancedModelSelector(kb, AssimilationMemoryModule(kb))
+    assimilation_module = model_selector.assimilation_module
     internal_monitor = InternalProcessMonitor()
-meta_cognitive_manager = MetaCognitiveManager()
+    metacognitive_manager = MetaCognitiveManager(process_manager, kb, model_selector)
 
-metacognitive_manager = MetaCognitiveManager(process_manager, kb, model_validator)
+    # Run the metacognitive tasks in a separate thread
+    asyncio.create_task(metacognitive_manager.run_metacognitive_tasks())
 
-# Run the metacognitive tasks in a separate thread
-asyncio.create_task(metacognitive_manager.run_metacognitive_tasks())
 
 # metacog end
 
@@ -148,20 +150,7 @@ def get_complexity_factor(X, y):
 # Run the async process
 if __name__ == "__main__":
     results = asyncio.run(main())
-# Train final model with best parameters
-    if best_params is not None:
-        final_model = YourModelClass().set_params(**best_params)
-        model_selector.assimilation_module.assimilate(final_model, X_train, y_train, complexity_factor)
-        final_performance = evaluate_performance(final_model, X_test, y_test)
-        logging.info(f"Final model MSE on test set: {final_performance}")
 
-        # Store the final model, complexity factor, and performance in the knowledge base
-        kb.update("final_model", final_model, complexity_factor)
-        kb.update("final_performance", final_performance, complexity_factor)
-    else:
-        logging.error("Optimization failed to produce valid results.")
-
-    return results
 
 ```
 
