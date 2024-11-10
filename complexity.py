@@ -1,5 +1,6 @@
 # 9 Base tier implemented Nov9
 # Beginning of complexity.py
+# Nov9 RRL Memory Module 
 from sklearn.linear_model import LinearRegression, Ridge, Lasso
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
 from sklearn.neural_network import MLPRegressor
@@ -7,6 +8,14 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from dataclasses import dataclass
 from typing import Any, Dict, Optional, Tuple, Callable
 import logging
+
+from .knowledge_base import TieredKnowledgeBase
+from .assimilation_memory_module import AssimilationMemoryModule
+
+class EnhancedModelSelector:
+    def __init__(self, knowledge_base: TieredKnowledgeBase, assimilation_module: AssimilationMemoryModule):
+        self.knowledge_base = knowledge_base
+        self.assimilation_module = assimilation_module
 
 @dataclass
 class ModelConfig:
